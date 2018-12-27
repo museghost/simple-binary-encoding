@@ -21,6 +21,9 @@ import uk.co.real_logic.sbe.generation.cpp.NamespaceOutputManager;
 import uk.co.real_logic.sbe.generation.golang.GolangGenerator;
 import uk.co.real_logic.sbe.generation.golang.GolangOutputManager;
 import uk.co.real_logic.sbe.generation.java.JavaGenerator;
+import uk.co.real_logic.sbe.generation.python.ModuleOutputManager;
+import uk.co.real_logic.sbe.generation.python.PythonGenerator;
+import uk.co.real_logic.sbe.generation.python.Python3Generator;
 import uk.co.real_logic.sbe.ir.Ir;
 
 import static uk.co.real_logic.sbe.SbeTool.*;
@@ -39,6 +42,22 @@ public enum TargetCodeGeneratorLoader implements TargetCodeGenerator
                 Boolean.getBoolean(JAVA_GENERATE_INTERFACES),
                 Boolean.getBoolean(DECODE_UNKNOWN_ENUM_VALUES),
                 new PackageOutputManager(outputDir, ir.applicableNamespace()));
+        }
+    },
+    
+    PYTHON2()
+    {
+        public CodeGenerator newInstance(final Ir ir, final String outputDir)
+        {
+            return new PythonGenerator(ir, new ModuleOutputManager(outputDir, ir.applicableNamespace()));
+        }
+    },
+
+    PYTHON3()
+    {
+        public CodeGenerator newInstance(final Ir ir, final String outputDir)
+        {
+            return new Python3Generator(ir, new ModuleOutputManager(outputDir, ir.applicableNamespace()));
         }
     },
 
