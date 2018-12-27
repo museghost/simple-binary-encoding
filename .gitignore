@@ -112,6 +112,10 @@ rust/car_example/Cargo.lock
 rust/car_example/src/car_example_generated_codec.rs
 rust/car_example/target
 
+# py
+py/**
+py3/**
+
 # Mac
 .DS_Store
 /sbe-tool/src/main/golang/uk_co_real_logic_sbe_ir_generated/
