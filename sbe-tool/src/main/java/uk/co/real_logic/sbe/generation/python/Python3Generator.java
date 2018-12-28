@@ -1062,16 +1062,26 @@ public class Python3Generator implements CodeGenerator
         final String epoch = encoding.epoch() == null ? "" : encoding.epoch();
         final String timeUnit = encoding.timeUnit() == null ? "" : encoding.timeUnit();
         final String semanticType = encoding.semanticType() == null ? "" : encoding.semanticType();
+        final String presence = encoding.presence() == null ? "" : encoding.presence().toString().toLowerCase();
 
         sb.append(String.format(
             "\n" +
             indent + "    @staticmethod\n" +
             indent + "    def %sMetaAttribute(meta):\n" +
-            indent + "        return \"???\"\n",
+            indent + "        if int(meta) == 1:\n" +
+            indent + "            return str('%s')\n" +
+            indent + "        elif int(meta) == 2:\n" +
+            indent + "            return str('%s')\n" +
+            indent + "        elif int(meta) == 3:\n" +
+            indent + "            return str('%s')\n" +
+            indent + "        elif int(meta) == 4:\n" +
+            indent + "            return str('%s')\n" +
+            indent + "        return \"\"\n",
             token.name(),
             epoch,
             timeUnit,
-            semanticType
+            semanticType,
+            presence
         ));
     }
 
